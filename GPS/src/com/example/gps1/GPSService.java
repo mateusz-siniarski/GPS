@@ -30,6 +30,7 @@ public class GPSService extends Service {
 	
 	@Override
 	public void onCreate() {
+		super.onCreate();
 		Log.i(tag, "onCreate");
 		_callCount = 0;
 		lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -37,6 +38,16 @@ public class GPSService extends Service {
 		startInForeground();
 	}
 	
+	
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		lm.removeUpdates(locationListener);
+	}
+
+
+
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId)
 	{
@@ -91,25 +102,17 @@ public class GPSService extends Service {
     	@Override
     	public void onLocationChanged(Location loc) {
     		
-    		//TextView t1 = (TextView) findViewById(R.id.textView_Latitude);
     		String s_latitude = "Lat: "+ Double.toString(loc.getLatitude());
-            MainActivity.latitude = (s_latitude);
             Log.i(gps_data,s_latitude);
             
-            //TextView t2 = (TextView) findViewById(R.id.textView_Longitude);
             String s_longitude = "Lng: " +Double.toString(loc.getLongitude());
-            MainActivity.longitude = (s_longitude);
             Log.i(gps_data,s_longitude);
             
-            //TextView t3 = (TextView) findViewById(R.id.textView_Altitude);
             String s_altitude = "Alt: "+Double.toString(loc.getAltitude());
-            MainActivity.altitude = (s_altitude);
             Log.i(gps_data,s_longitude);
             
-            //TextView t4 = (TextView) findViewById(R.id.textView_Speed);
             double km = 3.6*loc.getSpeed();
             String s_speed = "Speed: "+Double.toString(km)+" km/h";
-            MainActivity.speed = (s_speed);
             Log.i(gps_data,s_speed);
             
             Intent updateUI = new Intent("LOCATION_UPDATED");

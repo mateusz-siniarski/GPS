@@ -8,28 +8,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-    <Button
-        android:id="@+id/button_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="82dp"
-        android:layout_marginLeft="36dp"
-        android:onClick="startButton"
-        android:text="Start" />
-
-    <Button
-        android:id="@+id/button_stop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button_start"
-        android:layout_alignBottom="@+id/button_start"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="54dp"
-        android:onClick="stopButton"
-        android:text="Stop" />
-
     <TextView
         android:id="@+id/textView_Latitude"
         android:layout_width="wrap_content"
@@ -55,7 +33,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="@string/hello_world" />
+        android:text="@string/start_stop" />
 
     <TextView
         android:id="@+id/textView_Speed"
@@ -76,16 +54,6 @@
         android:text="Alt" />
 
     <Button
-        android:id="@+id/button_start_service"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button_stop"
-        android:layout_marginTop="20dp"
-        android:layout_toLeftOf="@+id/textView_Speed"
-        android:onClick="startService"
-        android:text="Start Service" />
-
-    <Button
         android:id="@+id/button_stop_service"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -93,5 +61,15 @@
         android:layout_toRightOf="@+id/textView_Speed"
         android:onClick="stopService"
         android:text="Stop Service" />
+
+    <Button
+        android:id="@+id/button_start_service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/textView_Altitude"
+        android:layout_marginBottom="43dp"
+        android:onClick="startService"
+        android:text="Start Service" />
 
 </RelativeLayout>
