@@ -1,11 +1,11 @@
 package com.example.gps1;
 
 
-import com.example.gps1.GPSService.MyLocationListener;
-
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -36,6 +36,8 @@ public class MainActivity extends Activity {
 		lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		locationListener = new MyLocationListener();
 		
+		registerReceiver(uiUpdated,new IntentFilter("LOCATION_UPDATED"));
+		
 	}
 	
 	public void startButton(View v) {
@@ -64,21 +66,12 @@ public class MainActivity extends Activity {
 		
 		if(runServiceIntent != null)	{
 			stopService(runServiceIntent);
+			unregisterReceiver(uiUpdated);
 			runServiceIntent = null;
 		}
 	}
 	
-	protected void getLocation()	{
-		
-		LocationListener locationListener = new MyLocationListener();
-		
-	}
-	/*
-	public void doSomething(View view)
-	{
-		//startActivity(new Intent("com.capgemini.second_activity"));
-		Log.d(tag, "Knappen er trykket!");
-	}*/
+	
 
 	@Override
 	protected void onStart()
@@ -113,6 +106,7 @@ public class MainActivity extends Activity {
 	{
 		super.onDestroy();
 		Log.d(tag, "Inne i onDestroy()");
+		unregisterReceiver(uiUpdated);
 	}
 	
 /*
@@ -130,6 +124,26 @@ public class MainActivity extends Activity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+    
+    BroadcastReceiver uiUpdated = new BroadcastReceiver()	{
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			TextView t1 = (TextView) findViewById(R.id.textView_Latitude);
+            t1.setText( intent.getExtras().getString("latitude") );
+            
+            TextView t2 = (TextView) findViewById(R.id.textView_Longitude);
+            t2.setText( intent.getExtras().getString("longitude") );
+            
+            TextView t3 = (TextView) findViewById(R.id.textView_Altitude);
+            t3.setText( intent.getExtras().getString("altitude") );
+            
+            TextView t4 = (TextView) findViewById(R.id.textView_Speed);
+            t4.setText( intent.getExtras().getString("speed") );
+			
+		}
+    	
+    };
     
     
     private class MyLocationListener implements LocationListener {
@@ -173,5 +187,6 @@ public class MainActivity extends Activity {
     	}
 
     }
+    
     
 }

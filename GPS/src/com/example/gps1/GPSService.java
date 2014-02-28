@@ -112,7 +112,12 @@ public class GPSService extends Service {
             MainActivity.speed = (s_speed);
             Log.i(gps_data,s_speed);
             
-            //MainActivity.updateValues();
+            Intent updateUI = new Intent("LOCATION_UPDATED");
+            updateUI.putExtra("latitude", s_latitude);
+            updateUI.putExtra("longitude", s_longitude);
+            updateUI.putExtra("altitude", s_altitude);
+            updateUI.putExtra("speed", s_speed);
+            sendBroadcast(updateUI);
             
             
 

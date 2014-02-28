@@ -30,6 +30,12 @@
                 <action android:name="com.example.gps1.action.LOG_POS" />
             </intent-filter>
         </service>
+        <receiver
+            android:name="com.example.gps1.locationReceiver">
+            <intent-filter>
+                <action android:name="com.example.gps1.action.LOCATION_UPDATED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
