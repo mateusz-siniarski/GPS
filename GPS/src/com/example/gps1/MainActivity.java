@@ -1,8 +1,12 @@
 package com.example.gps1;
 
 
+import com.example.gps1.GPSService.MyLocationListener;
+
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -29,6 +33,8 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		Log.d(tag, "Inne i onCreate()");
+		lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		locationListener = new MyLocationListener();
 		
 	}
 	
@@ -36,6 +42,7 @@ public class MainActivity extends Activity {
 				//startActivity(new Intent("android.intent.action.secondActivity"));
 				Log.d(tag, "Start knappen er trykket!");
 				lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, locationListener);
+				
 	}
 	
 	public void stopButton(View v) {
@@ -63,7 +70,7 @@ public class MainActivity extends Activity {
 	
 	protected void getLocation()	{
 		
-		//LocationListener locationListener = new MyLocationListener();
+		LocationListener locationListener = new MyLocationListener();
 		
 	}
 	/*
@@ -124,7 +131,7 @@ public class MainActivity extends Activity {
         return true;
     }
     
-    /*
+    
     private class MyLocationListener implements LocationListener {
 
     	@Override
@@ -165,6 +172,6 @@ public class MainActivity extends Activity {
 
     	}
 
-    }*/
+    }
     
 }
