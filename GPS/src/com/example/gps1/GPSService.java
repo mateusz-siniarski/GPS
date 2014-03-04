@@ -18,8 +18,10 @@ public class GPSService extends Service {
 
 	int _notificationId = 1;
 	int _callCount = 0;
+	int gpsRefresh = 0;
 	private String tag = "Livssyklus";
 	private String gps_data = "gps_data";
+	
 	
 	LocationManager lm;
 	LocationListener locationListener;
@@ -54,7 +56,7 @@ public class GPSService extends Service {
 		_callCount++;
 		Log.i(tag, "onStartCommand - call #" + _callCount);
 		
-		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, locationListener);
+		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 		
 		
 		
@@ -101,7 +103,7 @@ public class GPSService extends Service {
 
     	@Override
     	public void onLocationChanged(Location loc) {
-    		
+    		Log.i(gps_data,"\n"+Integer.toString(gpsRefresh++));
     		String s_latitude = "Lat: "+ Double.toString(loc.getLatitude());
             Log.i(gps_data,s_latitude);
             

@@ -14,7 +14,7 @@ import android.widget.TextView;
 public class MainActivity extends Activity {
 
 	private String tag = "Livssyklus";
-	Intent runServiceIntent;
+	static Intent runServiceIntent;
 	
 	
 	@Override
