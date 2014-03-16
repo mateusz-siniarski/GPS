@@ -28,8 +28,6 @@ public class GPSService extends Service {
 	Intent runServiceIntent;
 	
 	
-	
-	
 	@Override
 	public void onCreate() {
 		super.onCreate();

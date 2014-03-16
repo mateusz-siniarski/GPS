@@ -12,8 +12,8 @@
         android:id="@+id/textView_Latitude"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
+        android:layout_alignLeft="@+id/textViewTitle"
+        android:layout_below="@+id/textViewTitle"
         android:layout_marginTop="28dp"
         android:text="Lat" />
 
@@ -27,7 +27,7 @@
         android:text="Lng" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/textViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"

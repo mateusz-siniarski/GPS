@@ -21,6 +21,13 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		Bundle extra = getIntent().getExtras();
+		String activityTitle = extra.getString("radioButton");
+		
+		TextView title = (TextView) findViewById(R.id.textViewTitle);
+		title.setText(activityTitle);
+		
 		Log.d(tag, "Inne i onCreate()");
 		registerReceiver(uiUpdated,new IntentFilter("LOCATION_UPDATED"));
 		
