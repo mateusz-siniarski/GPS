@@ -26,12 +26,12 @@ public final class R {
     public static final class id {
         public static final int action_settings=0x7f08000c;
         public static final int buttonStart=0x7f08000a;
-        public static final int button_start_service=0x7f080006;
-        public static final int button_stop_service=0x7f080005;
+        public static final int button_stop_service=0x7f080006;
         public static final int radioActivity=0x7f080007;
         public static final int radioButtonDrive=0x7f080009;
         public static final int radioButtonGo=0x7f080008;
         public static final int textView2=0x7f08000b;
+        public static final int textViewDistance=0x7f080005;
         public static final int textViewTitle=0x7f080001;
         public static final int textView_Altitude=0x7f080004;
         public static final int textView_Latitude=0x7f080000;

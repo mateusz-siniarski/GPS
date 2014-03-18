@@ -27,15 +27,6 @@
         android:text="Lng" />
 
     <TextView
-        android:id="@+id/textViewTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="@string/start_stop" />
-
-    <TextView
         android:id="@+id/textView_Speed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -53,23 +44,33 @@
         android:layout_marginTop="32dp"
         android:text="Alt" />
 
+    <TextView
+        android:id="@+id/textViewDistance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView_Speed"
+        android:layout_below="@+id/textView_Speed"
+        android:layout_marginTop="36dp"
+        android:text="Distance" />
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp"
+        android:text="@string/start_stop"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
     <Button
         android:id="@+id/button_stop_service"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/button_start_service"
-        android:layout_toRightOf="@+id/textView_Speed"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/textViewTitle"
+        android:layout_marginBottom="42dp"
         android:onClick="stopService"
         android:text="Stop Service" />
-
-    <Button
-        android:id="@+id/button_start_service"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/textView_Altitude"
-        android:layout_marginBottom="43dp"
-        android:onClick="startService"
-        android:text="Start Service" />
 
 </RelativeLayout>

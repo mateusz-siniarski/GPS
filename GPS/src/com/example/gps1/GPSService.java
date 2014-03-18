@@ -22,6 +22,9 @@ public class GPSService extends Service {
 	private String tag = "Livssyklus";
 	private String gps_data = "gps_data";
 	
+	public Location prevLocation;
+	public int countLocations = 0;
+	public float distanceSumInMeters = 0;
 	
 	LocationManager lm;
 	LocationListener locationListener;
@@ -45,7 +48,8 @@ public class GPSService extends Service {
 		super.onDestroy();
 		lm.removeUpdates(locationListener);
 	}
-
+	
+	
 
 
 	@Override
@@ -115,15 +119,30 @@ public class GPSService extends Service {
             String s_speed = "Speed: "+Double.toString(km)+" km/h";
             Log.i(gps_data,s_speed);
             
+            calcDistance(loc);
+            Log.i(gps_data,Float.toString(distanceSumInMeters));
+            
             Intent updateUI = new Intent("LOCATION_UPDATED");
             updateUI.putExtra("latitude", s_latitude);
             updateUI.putExtra("longitude", s_longitude);
             updateUI.putExtra("altitude", s_altitude);
             updateUI.putExtra("speed", s_speed);
+            //updateUI.putExtra("distance", "Distance: "+distanceSumInMeters);
+            updateUI.putExtra("distance",distanceSumInMeters);
+            
             sendBroadcast(updateUI);
             
             
 
+    	}
+    	
+    	public void calcDistance(Location curLocation)	{
+    		if(countLocations > 0)	{
+    			float temp = prevLocation.distanceTo(curLocation);
+    			distanceSumInMeters+=temp;
+    		}
+    		prevLocation = curLocation;
+    		countLocations++;
     	}
 
     	@Override

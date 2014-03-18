@@ -6,16 +6,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
 	private String tag = "Livssyklus";
 	static Intent runServiceIntent;
+	public String activityTitle;
 	
+	float vibJump = 1000;
+	float vibDistance = 1000;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,13 +28,19 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		Bundle extra = getIntent().getExtras();
-		String activityTitle = extra.getString("radioButton");
+		activityTitle = extra.getString("radioButton");
 		
 		TextView title = (TextView) findViewById(R.id.textViewTitle);
 		title.setText(activityTitle);
 		
 		Log.d(tag, "Inne i onCreate()");
 		registerReceiver(uiUpdated,new IntentFilter("LOCATION_UPDATED"));
+		
+		if(runServiceIntent == null)	{
+			runServiceIntent = new Intent("com.example.gps1.action.LOG_POS");
+			startService(runServiceIntent);
+		}
+		
 		
 	}
 	
@@ -52,6 +63,7 @@ public class MainActivity extends Activity {
 			runServiceIntent = null;
 		}
 	}
+	
 	
 	@Override
 	protected void onStart()
@@ -97,6 +109,15 @@ public class MainActivity extends Activity {
         return true;
     }
     
+    public void vibrateAfterDistance(float distance)	{
+    	if(distance>vibDistance)	{
+    		Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+    		v.vibrate(1000);
+    		Log.i(tag,"Vibrasjon etter "+distance);
+    		vibDistance+=vibJump;
+    	}
+    }
+    
     BroadcastReceiver uiUpdated = new BroadcastReceiver()	{
 
 		@Override
@@ -112,8 +133,23 @@ public class MainActivity extends Activity {
             
             TextView t4 = (TextView) findViewById(R.id.textView_Speed);
             t4.setText( intent.getExtras().getString("speed") );
+            
+            TextView t5 = (TextView) findViewById(R.id.textViewDistance);
+            
+            Float distance = intent.getExtras().getFloat("distance");
+            if (activityTitle.equals("Drive"))	{
+            	distance/=1000;
+            	t5.setText("Distance: "+distance+" km");
+            }
+            else	{
+            	t5.setText("Distance: "+distance+" m");
+            	vibrateAfterDistance(distance);
+            }
+            
 			
 		}
+		
+		
     	
     };
 
