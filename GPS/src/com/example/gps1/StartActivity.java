@@ -46,5 +46,10 @@ public class StartActivity extends Activity {
 		
 		
 	}
+	
+	public void runTest(View v)	{
+		Intent intent = new Intent(this, Test.class);
+		startActivity(intent);
+	}
 
 }

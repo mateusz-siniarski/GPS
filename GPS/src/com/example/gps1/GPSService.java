@@ -60,8 +60,6 @@ public class GPSService extends Service {
 		
 		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 		
-		
-		
 		return START_NOT_STICKY;
 	}
 	

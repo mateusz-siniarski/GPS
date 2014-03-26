@@ -58,4 +58,14 @@
         android:text="@string/chooseActivity"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
+    <Button
+        android:id="@+id/buttonTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="28dp"
+        android:onClick="runTest"
+        android:text="Button" />
+
 </RelativeLayout>
