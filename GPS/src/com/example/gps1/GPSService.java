@@ -1,5 +1,7 @@
 package com.example.gps1;
 
+import com.example.gps1.database.ActivitiesDataSource;
+
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -12,6 +14,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 
 public class GPSService extends Service {
@@ -22,9 +25,14 @@ public class GPSService extends Service {
 	private String tag = "Livssyklus";
 	private String gps_data = "gps_data";
 	
+	private ActivitiesDataSource datasource;
 	public Location prevLocation;
 	public int countLocations = 0;
 	public float distanceSumInMeters = 0;
+	
+	
+	public String activityType;
+	
 	
 	LocationManager lm;
 	LocationListener locationListener;
@@ -47,8 +55,21 @@ public class GPSService extends Service {
 	public void onDestroy() {
 		super.onDestroy();
 		lm.removeUpdates(locationListener);
+		
+		addToTable();
+
 	}
 	
+	public void addToTable()	{
+		datasource = new ActivitiesDataSource(this);
+		datasource.open();
+		
+		datasource.createActivity(activityType, distanceSumInMeters);
+		Toast toast = Toast.makeText(this, activityType+" "+distanceSumInMeters, Toast.LENGTH_SHORT);
+		toast.show();
+		
+		datasource.close();
+	}
 	
 
 
@@ -59,6 +80,9 @@ public class GPSService extends Service {
 		Log.i(tag, "onStartCommand - call #" + _callCount);
 		
 		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+		
+		Bundle extra = intent.getExtras();
+		activityType = extra.getString("activityType");
 		
 		return START_NOT_STICKY;
 	}

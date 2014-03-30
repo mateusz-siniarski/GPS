@@ -38,6 +38,7 @@ public class MainActivity extends Activity {
 		
 		if(runServiceIntent == null)	{
 			runServiceIntent = new Intent("com.example.gps1.action.LOG_POS");
+			runServiceIntent.putExtra("activityType", activityTitle);
 			startService(runServiceIntent);
 		}
 		
@@ -49,6 +50,7 @@ public class MainActivity extends Activity {
 		Log.d(tag, "Start Service knapp trykket");
 		if(runServiceIntent == null)	{
 			runServiceIntent = new Intent("com.example.gps1.action.LOG_POS");
+			
 			startService(runServiceIntent);
 		}
 	}
@@ -62,6 +64,10 @@ public class MainActivity extends Activity {
 			//unregisterReceiver(uiUpdated);
 			runServiceIntent = null;
 		}
+		finish();
+		Intent intent = new Intent(this, MyList.class);
+		startActivity(intent);
+		
 	}
 	
 	

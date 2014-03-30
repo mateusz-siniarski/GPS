@@ -4,11 +4,11 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class SQLLiteHelper extends SQLiteOpenHelper{
+public class SQLiteHelper extends SQLiteOpenHelper{
 	private static final String DATABASE_NAME = "activities.db";
-	private static final int DATABASE_VERSION = 2;
+	private static final int DATABASE_VERSION = 3;
 	
-	public SQLLiteHelper(Context context) {
+	public SQLiteHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 

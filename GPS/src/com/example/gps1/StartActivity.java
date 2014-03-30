@@ -1,10 +1,12 @@
 package com.example.gps1;
 
-import android.os.Bundle;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -22,7 +24,7 @@ public class StartActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.start, menu);
+		getMenuInflater().inflate(R.menu.list, menu);
 		return true;
 	}
 	
@@ -45,6 +47,11 @@ public class StartActivity extends Activity {
         startActivity(intent);
 		
 		
+	}
+	
+	public void showList(MenuItem menuitem) 	{
+		Intent listIntent = new Intent(this, MyList.class);
+		startActivity(listIntent);
 	}
 	
 	public void runTest(View v)	{

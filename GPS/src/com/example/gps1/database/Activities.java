@@ -12,9 +12,8 @@ public class Activities {
 
 			"create table " + TABLE_ACTIVITIES + "(" + 
 			COLUMN_ID + " integer primary key autoincrement, " +
-
 			COLUMN_ACTIVITY_TYPE + " text not null, " +
-			COLUMN_ACTIVITY_DISTANCE + " integer not null" + ");";
+			COLUMN_ACTIVITY_DISTANCE + " real not null" + ");";
 
 
 	public static void onCreate(SQLiteDatabase database) {
